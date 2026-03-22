@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Para ti 💛</title>
+
+    <!-- Fuente bonita -->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(#fff8dc, #fff);
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .contenido {
+            position: relative;
+            z-index: 2;
+            margin-top: 40px;
+        }
+
+        h1 {
+            color: #d4a017;
+            font-size: 34px;
+            font-family: 'Pacifico', cursive;
+            margin-bottom: 20px;
+        }
+
+        img {
+            width: 320px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            margin: 20px 0;
+            animation: flotar 3s infinite ease-in-out;
+        }
+
+        .texto-snoopy {
+            font-family: 'Pacifico', cursive;
+            color: #d4a017;
+            font-size: 20px;
+            margin-top: -10px;
+        }
+
+        p {
+            margin-top: 25px;
+            font-size: 24px;
+            color: #555;
+            display: none;
+            line-height: 1.6;
+            padding: 0 20px;
+        }
+
+        button {
+            position: absolute;
+            padding: 12px 25px;
+            background: #ffd700;
+            border: none;
+            border-radius: 15px;
+            font-size: 18px;
+            cursor: pointer;
+            font-family: 'Pacifico', cursive;
+        }
+
+        @keyframes flotar {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0); }
+        }
+
+        .estrella {
+            position: absolute;
+            top: -50px;
+            font-size: 25px;
+            animation: caer linear infinite;
+            color: gold;
+        }
+
+        @keyframes caer {
+            to {
+                transform: translateY(110vh);
+            }
+        }
+
+        .explosion {
+            position: absolute;
+            font-size: 30px;
+            animation: explotar 1s ease-out forwards;
+            color: gold;
+        }
+
+        @keyframes explotar {
+            0% { transform: scale(0); opacity: 1; }
+            100% { transform: scale(3); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenido">
+        <h1>Son para ti 💛</h1>
+
+        <img src="snoopy.png" alt="Snoopy con flores">
+
+        <div class="texto-snoopy">
+            Snoopy porque sé cuánto te gusta 🐶💛
+        </div>
+
+        <br><br>
+        <button id="boton">Presiona aquí 😏</button>
+
+        <p id="mensaje">
+            Toma, estas son para ti 🌼 <br><br>
+            ves como si me caes bien <br>
+            creida orgullosa e invidiosa 🤗
+        </p>
+    </div>
+
+    <script>
+        let movimientos = 0;
+        const boton = document.getElementById("boton");
+
+        boton.addEventListener("mouseover", () => {
+            if (movimientos < 3) {
+                const x = Math.random() * (window.innerWidth - 120);
+                const y = Math.random() * (window.innerHeight - 60);
+                boton.style.left = x + "px";
+                boton.style.top = y + "px";
+                movimientos++;
+            }
+        });
+
+        boton.addEventListener("click", () => {
+            if (movimientos >= 3) {
+                document.getElementById("mensaje").style.display = "block";
+                boton.style.display = "none";
+                lanzarFuegos();
+            }
+        });
+
+        function crearEstrella() {
+            const estrella = document.createElement("div");
+            estrella.classList.add("estrella");
+            estrella.innerHTML = "⭐";
+            estrella.style.left = Math.random() * window.innerWidth + "px";
+            estrella.style.animationDuration = (Math.random() * 3 + 2) + "s";
+
+            document.body.appendChild(estrella);
+
+            setTimeout(() => {
+                estrella.remove();
+            }, 5000);
+        }
+
+        setInterval(crearEstrella, 300);
+
+        function lanzarFuegos() {
+            for (let i = 0; i < 25; i++) {
+                const fuego = document.createElement("div");
+                fuego.classList.add("explosion");
+                fuego.innerHTML = "✨";
+                fuego.style.left = Math.random() * window.innerWidth + "px";
+                fuego.style.top = Math.random() * window.innerHeight + "px";
+
+                document.body.appendChild(fuego);
+
+                setTimeout(() => {
+                    fuego.remove();
+                }, 1000);
+            }
+        }
+    </script>
+
+</body>
+</html>
